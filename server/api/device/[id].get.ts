@@ -6,7 +6,6 @@ export default defineEventHandler(async (event) => {
     const config = readDeviceConfig(id);
     if (config) {
         const data = await fetchDeviceData(config);
-        console.log(data);
         let res = data.match(config.schema);
         return {
             data: res,
