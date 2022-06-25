@@ -1,34 +1,13 @@
-import yml from "js-yaml";
-import fs from "fs";
-import path from "path";
-import axios from "axios";
+import { fetchDeviceData, readDeviceConfig } from "@/utils/utils";
 import { sendError } from "h3";
 
 export default defineEventHandler(async (event) => {
-    const runtimeConfig = useRuntimeConfig();
     const id = event.context.params.id;
-    let config;
-    try {
-        config = yml.load(fs.readFileSync(path.join(runtimeConfig.deviceConfigPath, `${id}.yml`)));
-        console.log(JSON.stringify(config));
-    } catch (error) {
-        config = undefined;
-    }
+    const config = readDeviceConfig(id);
     if (config) {
-        const { device } = config;
-        const data = await axios
-            .get(device.resource.url, {
-                headers: {
-                    accept: "application/xml",
-                },
-                auth: {
-                    username: device.resource.credentials.user,
-                    password: device.resource.credentials.password,
-                },
-            })
-            .then((res) => res.data);
+        const data = await fetchDeviceData(config);
         console.log(data);
-        let res = data.match(device.schema);
+        let res = data.match(config.schema);
         return {
             data: res,
         };
