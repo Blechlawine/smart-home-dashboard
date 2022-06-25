@@ -5,7 +5,7 @@ import path from "path";
 export default defineNuxtConfig({
     modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
     runtimeConfig: {
-        deviceConfigPath: path.join(__dirname, "/devices"),
+        deviceConfigPath: path.join(__dirname, "/config/devices"),
     },
     colorMode: {
         preference: "night",
