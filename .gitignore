@@ -7,3 +7,6 @@ node_modules
 .env
 dist
 .vscode
+devices/*.yml
+devices/*.yaml
+!devices/example.yml

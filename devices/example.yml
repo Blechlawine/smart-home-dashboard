@@ -1,0 +1,7 @@
+device:
+  resource:
+    url: "url to the device data"
+    credentials:
+      user: username for basic auth
+      password: password for basic auth
+  schema: regex to parse the data from the resource url (gets directly passed to new Regex(...), so no / at the beginning and end)

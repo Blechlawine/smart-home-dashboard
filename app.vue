@@ -7,6 +7,6 @@
 const temperature = ref("");
 
 onMounted(async () => {
-    temperature.value = await $fetch("/api/temperature");
+    temperature.value = await $fetch("/api/device/temperature1");
 });
 </script>
