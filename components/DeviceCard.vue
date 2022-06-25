@@ -1,6 +1,8 @@
 <template>
     <Card>
-        <template #title> Temperature 1 </template>
+        <template #title>
+            {{ props.id }}
+        </template>
         <template #figure>
             <div class="temperature-radial radial-progress text-primary" :style="temperatureStyles">
                 <p>{{ device.pending.value ? "..." : device.response.value.data[0] }}</p>
@@ -15,7 +17,14 @@
 </template>
 
 <script setup lang="ts">
-const device = await useDevice("temperature1");
+const props = defineProps({
+    id: {
+        type: String,
+        required: true,
+    },
+});
+
+const device = await useDevice(props.id);
 
 const scaleTemp = (value: number) => {
     return (100 / 20) * (value - 10);

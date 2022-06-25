@@ -1,8 +1,7 @@
 <template>
     <NuxtLayout name="dashboard">
-        <div class="grid gap-4">
-            <DeviceCard/>
-        </div>
+        <DeviceCard id="temperatureOutside"/>
+        <DeviceCard id="temperatureInside"/>
     </NuxtLayout>
 </template>
 <script setup lang="ts">
