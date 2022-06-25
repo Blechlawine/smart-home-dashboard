@@ -34,3 +34,12 @@ const temperatureStyles = computed(() => ({
     "--value": `${scaleTemp(parseFloat(device.response.value.data[0]))}`,
 }));
 </script>
+<style>
+.temperature-radial {
+    transform: rotate(180deg);
+}
+
+.temperature-radial > * {
+    transform: rotate(-180deg);
+}
+</style>

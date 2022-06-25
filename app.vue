@@ -8,12 +8,4 @@
 </script>
 <style>
 @import "@/assets/icons.css";
-
-.temperature-radial {
-    transform: rotate(180deg);
-}
-
-.temperature-radial > * {
-    transform: rotate(-180deg);
-}
 </style>
