@@ -6,6 +6,11 @@
                 <p>{{ device.pending.value ? "..." : device.response.value.data[0] }}</p>
             </div>
         </template>
+        <template #actions>
+            <button class="btn btn-xs" @click="() => device.refresh()">
+                <span class="material-icons">refresh</span>
+            </button>
+        </template>
     </Card>
 </template>
 
