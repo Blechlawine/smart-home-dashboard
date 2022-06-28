@@ -1,0 +1,5 @@
+screen:
+  title: Title of the screen
+  content:
+    - device: ID of the device this element should fetch
+      type: the type of display element (currently only "temperature")

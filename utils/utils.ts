@@ -15,6 +15,18 @@ export const readDeviceConfig = (id: string): IDeviceConfig => {
     return config.device;
 };
 
+export const readScreenConfig = (id: string): IScreenConfig => {
+    const runtimeConfig = useRuntimeConfig();
+    let config: IScreenConfigFile;
+    try {
+        config = yml.load(fs.readFileSync(path.join(runtimeConfig.screenConfigPath, `${id}.yml`)));
+        // console.log(JSON.stringify(config));
+    } catch (error) {
+        config = undefined;
+    }
+    return config.screen;
+};
+
 export const fetchDeviceData = async (deviceConfig: IDeviceConfig) => {
     return await axios
         .get(deviceConfig.resource.url, {

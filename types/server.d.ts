@@ -1,3 +1,4 @@
+// DEVICES
 interface IDeviceConfigFile {
     device: IDeviceConfig;
 }
@@ -15,4 +16,19 @@ interface IResource {
 interface ICredentials {
     user: string;
     password: string;
+}
+
+// SCREENS
+interface IScreenConfigFile {
+    screen: IScreenConfig;
+}
+
+interface IScreenConfig {
+    title: string;
+    content: IScreenContentElement[];
+}
+
+interface IScreenContentElement {
+    type: "temperature"; // TODO: add more card types
+    device: string;
 }
