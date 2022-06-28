@@ -21,6 +21,7 @@
 <script setup lang="ts">
 const colorMode = useColorMode();
 const themes = [
+    "main",
     "light",
     "dark",
     "cupcake",
