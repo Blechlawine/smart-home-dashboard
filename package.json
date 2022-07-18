@@ -1,4 +1,7 @@
 {
+    "name": "smart-home-dashboard",
+    "version": "0.1",
+    "license": "GPL-3.0",
     "private": true,
     "scripts": {
         "build": "nuxt build",
