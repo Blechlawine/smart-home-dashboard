@@ -5,3 +5,7 @@ device:
       user: username for basic auth
       password: password for basic auth
   schema: regex to parse the data from the resource url (gets directly passed to new Regex(...), so no / at the beginning and end)
+  metadata:
+    dataType: string | number | boolean
+    min: number, minimum length in case of string, minimum value in case of number
+    max: number, maximum length in case of string, maximum value in case of number

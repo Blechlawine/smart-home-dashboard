@@ -1,30 +1,32 @@
-import yml from "js-yaml";
+import yml from "yaml";
 import fs from "fs";
 import path from "path";
 import axios from "axios";
 
-export const readDeviceConfig = (id: string): IDeviceConfig => {
+export const readDeviceConfig = (id: string) => {
     const runtimeConfig = useRuntimeConfig();
-    let config: IDeviceConfigFile;
+    let config: IDeviceConfigFile | undefined;
     try {
-        config = yml.load(fs.readFileSync(path.join(runtimeConfig.deviceConfigPath, `${id}.yml`)));
-        // console.log(JSON.stringify(config));
+        const readData = fs.readFileSync(path.join(runtimeConfig.deviceConfigPath, `${id}.yml`));
+        config = yml.parse(readData.toString("utf-8"));
+        console.log(JSON.stringify(config));
     } catch (error) {
         config = undefined;
     }
-    return config.device;
+    return config?.device;
 };
 
-export const readScreenConfig = (id: string): IScreenConfig => {
+export const readScreenConfig = (id: string) => {
     const runtimeConfig = useRuntimeConfig();
-    let config: IScreenConfigFile;
+    let config: IScreenConfigFile | undefined;
     try {
-        config = yml.load(fs.readFileSync(path.join(runtimeConfig.screenConfigPath, `${id}.yml`)));
+        const readData = fs.readFileSync(path.join(runtimeConfig.screenConfigPath, `${id}.yml`));
+        config = yml.parse(readData.toString("utf-8"));
         // console.log(JSON.stringify(config));
     } catch (error) {
         config = undefined;
     }
-    return config.screen;
+    return config?.screen;
 };
 
 export const fetchDeviceData = async (deviceConfig: IDeviceConfig) => {

@@ -4,8 +4,18 @@
             {{ props.id }}
         </template>
         <template #figure>
-            <div class="temperature-radial radial-progress text-primary" :style="temperatureStyles">
-                <p>{{ device.pending.value ? "..." : device.response.value.data[0] }}</p>
+            <div
+                v-if="response?.metadata.dataType === 'number'"
+                class="temperature-radial radial-progress text-primary"
+                :style="numberStyles"
+            >
+                <p>{{ device.pending.value ? "..." : response?.data[0] }}</p>
+            </div>
+            <div v-else-if="response?.metadata.dataType === 'string'">
+                <p>{{ device.pending.value ? "..." : response?.data[0] }}</p>
+            </div>
+            <div v-else-if="response?.metadata.dataType === 'boolean'">
+                <p>{{ device.pending.value ? "..." : response?.data[0] }}</p>
             </div>
         </template>
         <template #actions>
@@ -26,12 +36,20 @@ const props = defineProps({
 
 const device = await useDevice(props.id);
 
-const scaleTemp = (value: number) => {
-    return (100 / 20) * (value - 10);
-};
-
-const temperatureStyles = computed(() => ({
-    "--value": `${scaleTemp(parseFloat(device.response.value.data[0]))}`,
+const response = computed(() => device.response.value);
+const scaledNumber = computed(() => {
+    if (response.value?.metadata.dataType === "number") {
+        const input = parseFloat(response.value?.data[0] ?? "");
+        const min = response.value?.metadata.min;
+        const max = response.value?.metadata.max;
+        return (
+            ((input - min) / (max - min)) *
+            100
+        );
+    }
+});
+const numberStyles = computed(() => ({
+    "--value": `${scaledNumber.value}`,
 }));
 </script>
 <style>

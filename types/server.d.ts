@@ -6,6 +6,25 @@ interface IDeviceConfigFile {
 interface IDeviceConfig {
     resource: IResource;
     schema: string;
+    metadata: TMetadata;
+}
+
+type TMetadata = INumberMetadata | IStringMetadata | IBooleanMetadata;
+
+interface INumberMetadata {
+    dataType: "number";
+    min: number;
+    max: number;
+}
+
+interface IStringMetadata {
+    dataType: "string";
+    min: number;
+    max: number;
+}
+
+interface IBooleanMetadata {
+    dataType: "boolean";
 }
 
 interface IResource {

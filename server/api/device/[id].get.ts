@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
         let res = data.match(config.schema);
         return {
             data: res,
+            metadata: config.metadata,
         };
     } else {
         sendError(event, createError({ statusCode: 404, statusMessage: `Device with id: "${id}" not found` }));
