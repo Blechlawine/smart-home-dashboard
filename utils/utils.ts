@@ -40,5 +40,5 @@ export const fetchDeviceData = async (deviceConfig: IDeviceConfig) => {
                 password: deviceConfig.resource.credentials.password,
             },
         })
-        .then((res) => res.data);
+        .then((res) => res.data as string);
 };

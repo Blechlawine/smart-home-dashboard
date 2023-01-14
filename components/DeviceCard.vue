@@ -9,13 +9,13 @@
                 class="temperature-radial radial-progress text-primary"
                 :style="numberStyles"
             >
-                <p>{{ device.pending.value ? "..." : response?.data[0] }}</p>
+                <p>{{ device.pending.value ? "..." : response?.data?.[0] }}</p>
             </div>
             <div v-else-if="response?.metadata.dataType === 'string'">
-                <p>{{ device.pending.value ? "..." : response?.data[0] }}</p>
+                <p>{{ device.pending.value ? "..." : response?.data?.[0] }}</p>
             </div>
             <div v-else-if="response?.metadata.dataType === 'boolean'">
-                <p>{{ device.pending.value ? "..." : response?.data[0] }}</p>
+                <p>{{ device.pending.value ? "..." : response?.data?.[0] }}</p>
             </div>
         </template>
         <template #actions>
@@ -39,7 +39,7 @@ const device = await useDevice(props.id);
 const response = computed(() => device.response.value);
 const scaledNumber = computed(() => {
     if (response.value?.metadata.dataType === "number") {
-        const input = parseFloat(response.value?.data[0] ?? "");
+        const input = parseFloat(response.value?.data?.[0] ?? "");
         const min = response.value?.metadata.min;
         const max = response.value?.metadata.max;
         return (
